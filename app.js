@@ -30,7 +30,7 @@ module.exports = function (apikey, endpoint, config) {
       path = '';
     }
 
-    var url = 'https://overheid.io/api/'+ endpoint +'/'+ path + fixParams (params);
+    var url = 'https://overheid.io/api/'+ endpoint + (path ? '/' : '') + path + fixParams (params);
 
     var options = {
       headers: {
@@ -78,22 +78,21 @@ module.exports = function (apikey, endpoint, config) {
 
 
 function fixParams (o) {
+  var n = [], k, i;
   if (o) {
-    var n = [], k, i;
     for (key in o) {
-      if (o [key] instanceof Object) {
-        for (k in o [key]) {
-          n.push (key +'['+ k +']='+ encodeURIComponent (o [key] [k]));
-        }
-      } else if (o [key] instanceof Array) {
+      if (o [key] instanceof Array) {
         for (i = 0; i < o [key] .length; i++) {
           n.push (key +'[]='+ encodeURIComponent (o [key] [i]));
+        }
+      } else if (o [key] instanceof Object) {
+        for (k in o [key]) {
+          n.push (key +'['+ k +']='+ encodeURIComponent (o [key] [k]));
         }
       } else {
         n.push (key +'='+ encodeURIComponent (o [key]));
       }
     }
-    return '?'+ n.join ('&');
   }
-  return '';
+  return n.length ? '?'+ n.join ('&') : '';
 }
