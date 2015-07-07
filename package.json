@@ -1,0 +1,32 @@
+{
+  "author": {
+    "name":               "Franklin van de Meent",
+    "email":              "fr@nkl.in",
+    "url":                "https://frankl.in"
+  },
+  "name":                 "overheid.io",
+  "description":          "Access overheid.io endpoints like OpenKvK, RDW and BAG",
+  "version":              "0.0.1",
+  "repository": {
+    "type":               "git",
+    "url":                "git://github.com/fvdm/nodejs-overheid.io.git"
+  },
+  "bugs": {
+    "url":                "https://github.com/fvdm/nodejs-overheid.io/issues"
+  },
+  "main":                 "app.js",
+  "dependencies":         {},
+  "devDependencies":      {},
+  "optionalDependencies": {},
+  "engines": {
+    "node":               ">=0.8.0"
+  },
+  "scripts": {
+    "test":               "node test.js"  
+  },
+  "keywords":             ["overheid.io", "overheid", "openkvk", "rdw", "bag", "nl", "api"],
+  "license": {
+    "type":               "Public Domain",
+    "url":                "https://github.com/fvdm/nodejs-overheid.io/raw/master/LICENSE"
+  }
+}
