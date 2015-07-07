@@ -63,13 +63,6 @@ module.exports = function (apikey, endpoint, config) {
       }
       catch (e) {}
 
-      if (err) {
-        error = new Error ('request failed');
-        error.error = err;
-        callback (error);
-        return;
-      }
-
       if (res.statusCode >= 300) {
         error = new Error ('API error');
         error.code = res.statusCode;
