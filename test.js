@@ -104,7 +104,7 @@ queue.push (function () {
 
 queue.push (function () {
   ovio ('error.test', function (err) {
-    doTest (null, 'error handling', [
+    doTest (null, 'no result', [
       ['type', err instanceof Error],
       ['message', err && err.message === 'no result']
     ]);
