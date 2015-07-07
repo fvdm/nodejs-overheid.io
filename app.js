@@ -44,6 +44,14 @@ module.exports = function (apikey, endpoint, config) {
       var data = res && res.body || null;
       var error = null;
 
+      if (err) {
+        error = new Error ('request failed');
+        error.error = err;
+        error.body = data;
+        callback (error);
+        return;
+      }
+
       try {
         data = JSON.parse (data);
       }
