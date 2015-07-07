@@ -55,7 +55,7 @@ module.exports = function (apikey, endpoint, config) {
       try {
         data = JSON.parse (data);
 
-        if (data.headers instanceof Object && Object.keys (data.headers) .length === 0) {
+        if (Object.keys (data) .length === 1 && Object.keys (data.headers) .length === 0) {
           error = new Error ('no result');
           callback (error);
           return;
