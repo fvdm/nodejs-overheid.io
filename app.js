@@ -57,6 +57,8 @@ module.exports = function (apikey, endpoint, config) {
 
         if (data.headers instanceof Object && Object.keys (data.headers) .length === 0) {
           error = new Error ('no result');
+          callback (error);
+          return;
         }
       }
       catch (e) {}
@@ -64,14 +66,18 @@ module.exports = function (apikey, endpoint, config) {
       if (err) {
         error = new Error ('request failed');
         error.error = err;
+        callback (error);
+        return;
       }
 
       if (res.statusCode >= 300) {
         error = new Error ('API error');
         error.code = res.statusCode;
+        callback (error);
+        return;
       }
 
-      callback (error, data);
+      callback (null, data);
     });
   };
 };
