@@ -103,6 +103,16 @@ queue.push (function () {
 
 
 queue.push (function () {
+  ovio ('error.test', function (err, data) {
+    doTest (null, 'error handling', [
+      ['type', err instanceof Error],
+      ['message', err && err.message === 'no result']
+    ]);
+  });
+});
+
+
+queue.push (function () {
   ovio ('4-TFL-24', { fields: ['eerstekleur'] }, function (err, data) {
     doTest (err, 'item', [
       ['data', data && data != null],
