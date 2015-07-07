@@ -9,7 +9,8 @@ License:      Unlicense (Public Domain) - see LICENSE file
 */
 
 // Setup
-var app = require ('./') (
+var app = require ('./');
+var ovio = new app (
   process.env.OVIO_APIKEY || null,
   'rdw',
   {
@@ -82,7 +83,27 @@ function doTest (err, label, tests) {
 
 
 queue.push (function () {
-  app ('4-TFL-24', { fields: ['eerstekleur'] }, function (err, data) {
+  var tmp = new app (
+    process.env.OVIO_APIKEY || null,
+    'rdw',
+    {
+      timeout: 1
+    }
+  );
+
+  tmp ('4-TFL-24', { fields: ['eerstekleur'] }, function (err) {
+    doTest (null, 'config.timeout', [
+      ['type', err instanceof Error],
+      ['message', err && err.message === 'request failed'],
+      ['error', err && err.error instanceof Object],
+      ['code', err && err.error && err.error.code === 'TIMEOUT']
+    ]);
+  });
+});
+
+
+queue.push (function () {
+  ovio ('4-TFL-24', { fields: ['eerstekleur'] }, function (err, data) {
     doTest (err, 'item', [
       ['data', data && data != null],
       ['type', data instanceof Object],
