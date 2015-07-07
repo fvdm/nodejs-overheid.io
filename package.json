@@ -27,8 +27,5 @@
     "test":               "node test.js"  
   },
   "keywords":             ["overheid.io", "overheid", "openkvk", "rdw", "bag", "nl", "api"],
-  "license": {
-    "type":               "Public Domain",
-    "url":                "https://github.com/fvdm/nodejs-overheid.io/raw/master/LICENSE"
-  }
+  "license":              "Unlicense"
 }
