@@ -124,6 +124,25 @@ queue.push (function () {
 });
 
 
+queue.push (function () {
+  ovio (
+    {
+      filters: { merk: 'bmw' },
+      fields: ['eerstekleur', 'vermogen']
+    },
+    function (err, data) {
+      doTest (err, 'list', [
+        ['type', data && data instanceof Object],
+        ['total', data && data.totalItemCount >= 1],
+        ['path', data && data._embedded && data._embedded.kenteken instanceof Array],
+        ['size', data && data._embedded && data._embedded.kenteken && data._embedded.kenteken.length >= 1],
+        ['item', data && data._embedded && data._embedded.kenteken && data._embedded.kenteken.length && data._embedded.kenteken [0] instanceof Object]
+      ]);
+    }
+  );
+})
+
+
 // Start the tests
 console.log ('Running tests...\n');
 queue [0] ();
