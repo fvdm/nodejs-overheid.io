@@ -41,7 +41,7 @@ module.exports = function (apikey, endpoint, config) {
     };
 
     http.get (url, options, function (err, res) {
-      var data = res.body || null;
+      var data = res && res.body || null;
       var error = null;
 
       try {
