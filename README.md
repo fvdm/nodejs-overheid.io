@@ -5,6 +5,10 @@ overheid.io API wrapper
 
 [![Build Status](https://travis-ci.org/fvdm/nodejs-overheid.io.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-overheid.io)
 
+* [node.js](https://nodejs.org)
+* [overheid.io](https://overheid.io)
+* [API documentation](https://overheid.io/documentatie)
+
 
 Voorbeeld
 ---------
