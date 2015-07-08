@@ -10,13 +10,18 @@ Voorbeeld
 ---------
 
 ```js
-var ovio = require ('overheid.io');
-var rdw = new ovio ('apikey', 'rdw');
+var ovio = require ('overheid.io') ({
+  apikey: 'abc123',
+  dataset: 'rdw'
+});
 
-ovio ('4-TFL-24', { fields: ['eerstekleur'] }, function (err, data) {
-  if (err) { return console.log (err); }
-  
-  console.log (data.eerstekleur);
+ovio ({
+  path: '4-TFL-24',
+  params: { fields: ['eerstekleur'] },
+  callback: function (err, data) {
+    if (err) { return console.log (err); }
+    console.log (data.eerstekleur);
+  }
 });
 ```
 

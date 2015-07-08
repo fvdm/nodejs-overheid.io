@@ -9,35 +9,24 @@ License:      Unlicense (Public Domain) - see LICENSE file
 */
 
 var http = require ('httpreq');
+
 var defaults = {
   timeout: 5000
 };
 
 
-// ('abc123', 'rdw', {timeout: 5000})
-module.exports = function (apikey, endpoint, config) {
-  // ('AB-12-XY', {filters: {merk: 'bmw'}}, function)
-  return function (path, params, callback) {
-    // ("", {}, function)
-    if (typeof params === 'function') {
-      callback = params;
-      params = {};
-    }
-
-    // ({}, function)
-    if (path instanceof Object) {
-      params = path;
-      path = '';
-    }
-
-    var url = 'https://overheid.io/api/'+ endpoint + (path ? '/' : '') + path + fixParams (params);
+module.exports = function (config) {
+  return function (request) {
+    var url = 'https://overheid.io/api/'+ (request.dataset || config.dataset);
+    url += request.path ? '/'+ request.path : '';
+    url += fixParams (request.params);
 
     var options = {
       headers: {
-        'ovio-api-key': apikey || '',
+        'ovio-api-key': config.apikey || '',
         'User-Agent': 'npmjs.com/overheid.io'
       },
-      timeout: parseInt (config && config.timeout || defaults.timeout)
+      timeout: parseInt (request.timeout || config.timeout || defaults.timeout)
     };
 
     http.get (url, options, function (err, res) {
@@ -48,7 +37,7 @@ module.exports = function (apikey, endpoint, config) {
         error = new Error ('request failed');
         error.error = err;
         error.body = data;
-        callback (error);
+        request.callback (error);
         return;
       }
 
@@ -57,7 +46,7 @@ module.exports = function (apikey, endpoint, config) {
 
         if (Object.keys (data) .length === 1 && Object.keys (data.headers) .length === 0) {
           error = new Error ('no result');
-          callback (error);
+          request.callback (error);
           return;
         }
       }
@@ -67,11 +56,11 @@ module.exports = function (apikey, endpoint, config) {
         error = new Error ('API error');
         error.code = res.statusCode;
         error.text = data.error || null;
-        callback (error);
+        request.callback (error);
         return;
       }
 
-      callback (null, data);
+      request.callback (null, data);
     });
   };
 };

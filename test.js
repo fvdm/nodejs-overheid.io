@@ -9,14 +9,11 @@ License:      Unlicense (Public Domain) - see LICENSE file
 */
 
 // Setup
-var app = require ('./');
-var ovio = new app (
-  process.env.OVIO_APIKEY || null,
-  'rdw',
-  {
-    timeout: process.env.OVIO_TIMEOUT || 5000
-  }
-);
+var app = require ('./') ({
+  apikey: process.env.OVIO_APIKEY || null,
+  timeout: process.env.OVIO_TIMEOUT || 5000,
+  dataset: 'rdw'
+});
 
 
 // handle exits
@@ -83,54 +80,58 @@ function doTest (err, label, tests) {
 
 
 queue.push (function () {
-  var tmp = new app (
-    process.env.OVIO_APIKEY || null,
-    'rdw',
-    {
-      timeout: 1
+  app ({
+    path: '4-TFL-24',
+    params: { fields: ['eerstekleur'] },
+    timeout: 1,
+    callback: function (err) {
+      doTest (null, 'config.timeout', [
+        ['type', err instanceof Error],
+        ['message', err && err.message === 'request failed'],
+        ['error', err && err.error instanceof Object],
+        ['code', err && err.error && err.error.code === 'TIMEOUT']
+      ]);
     }
-  );
-
-  tmp ('4-TFL-24', { fields: ['eerstekleur'] }, function (err) {
-    doTest (null, 'config.timeout', [
-      ['type', err instanceof Error],
-      ['message', err && err.message === 'request failed'],
-      ['error', err && err.error instanceof Object],
-      ['code', err && err.error && err.error.code === 'TIMEOUT']
-    ]);
   });
 });
 
 
 queue.push (function () {
-  ovio ('error.test', function (err) {
-    doTest (null, 'no result', [
-      ['type', err instanceof Error],
-      ['message', err && err.message === 'no result']
-    ]);
+  app ({
+    path: 'error.test',
+    callback: function (err) {
+      doTest (null, 'no result', [
+        ['type', err instanceof Error],
+        ['message', err && err.message === 'no result']
+      ]);
+    }
   });
 });
 
 
 queue.push (function () {
-  ovio ('4-TFL-24', { fields: ['eerstekleur'] }, function (err, data) {
-    doTest (err, 'item', [
-      ['data', data && data != null],
-      ['type', data instanceof Object],
-      ['property', data && data.kenteken === '4-TFL-24'],
-      ['field', data && typeof data.eerstekleur === 'string']
-    ]);
-  })
+  app ({
+    path: '4-TFL-24',
+    params: { fields: ['eerstekleur'] },
+    callback: function (err, data) {
+      doTest (err, 'item', [
+        ['data', data && data != null],
+        ['type', data instanceof Object],
+        ['property', data && data.kenteken === '4-TFL-24'],
+        ['field', data && typeof data.eerstekleur === 'string']
+      ]);
+    }
+  });
 });
 
 
 queue.push (function () {
-  ovio (
-    {
+  app ({
+    params: {
       filters: { merk: 'bmw' },
       fields: ['eerstekleur', 'vermogen']
     },
-    function (err, data) {
+    callback: function (err, data) {
       doTest (err, 'list', [
         ['type', data && data instanceof Object],
         ['total', data && data.totalItemCount >= 1],
@@ -139,8 +140,8 @@ queue.push (function () {
         ['item', data && data._embedded && data._embedded.kenteken && data._embedded.kenteken.length && data._embedded.kenteken [0] instanceof Object]
       ]);
     }
-  );
-})
+  });
+});
 
 
 // Start the tests
