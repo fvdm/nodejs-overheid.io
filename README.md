@@ -34,6 +34,64 @@ Normaal: `npm install overheid.io`
 Development: `npm install fvdm/nodejs-overheid.io#develop`
 
 
+Setup
+-----
+
+De module geeft een _function_ terug voor algemene instellingen.
+
+
+#### Instellingen
+
+ param   | type    | vereist | default | uitleg
+:--------|:--------|:--------|:--------|:--------------------------
+ apikey  | string  | ja      |         | de API key
+ dataset | string  | nee     |         | welke dataset te gebruiken
+ timeout | integer | nee     | 5000    | wacht time-out in ms
+
+
+> Je kan `timeout` en `dataset` ook per call in de API functie instellen.
+
+
+```js
+var ovio = require ('overheid.io') ({
+  apikey: 'abc123',
+  dataset: 'rdw'
+});
+```
+
+
+API functie
+-----------
+
+De _Setup_ geeft ook een _function_ terug, deze doet de API calls.
+
+
+#### Instellingen
+
+ param    | type     | vereist | default| uitleg
+:---------|:---------|:--------|:-------|:-----------------------------
+ path     | string   | nee     |        | resource pad, i.e. `DA-GO-12`
+ params   | object   | nee     |        | parameters om mee te sturen
+ timeout  | integer  | nee     | 5000   | wacht time-out in ms
+ dataset  | string   | nee     |        | welke dataset te gebruiken
+ callback | function | ja      |        | `function (err, data) {}`
+
+
+> `timeout` and `dataset` default to Setup when not provided.
+
+
+```js
+ovio ({
+  path: '4-TFL-24',
+  params: { fields: ['eerstekleur'] },
+  callback: function (err, data) {
+    if (err) { return console.log (err); }
+    console.log (data.eerstekleur);
+  }
+});
+```
+
+
 Unlicense
 ---------
 
