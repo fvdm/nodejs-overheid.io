@@ -66,22 +66,22 @@ module.exports = function (config) {
 };
 
 
-function fixParams (o) {
-  var n = [], k, i;
-  if (o) {
-    for (key in o) {
-      if (o [key] instanceof Array) {
-        for (i = 0; i < o [key] .length; i++) {
-          n.push (key +'[]='+ encodeURIComponent (o [key] [i]));
+function fixParams (obj) {
+  var nw = [], k, i;
+  if (obj) {
+    for (key in obj) {
+      if (obj [key] instanceof Array) {
+        for (i = 0; i < obj [key] .length; i++) {
+          nw.push (key +'[]='+ encodeURIComponent (obj [key] [i]));
         }
-      } else if (o [key] instanceof Object) {
-        for (k in o [key]) {
-          n.push (key +'['+ k +']='+ encodeURIComponent (o [key] [k]));
+      } else if (obj [key] instanceof Object) {
+        for (k in obj [key]) {
+          nw.push (key +'['+ k +']='+ encodeURIComponent (obj [key] [k]));
         }
       } else {
-        n.push (key +'='+ encodeURIComponent (o [key]));
+        nw.push (key +'='+ encodeURIComponent (obj [key]));
       }
     }
   }
-  return n.length ? '?'+ n.join ('&') : '';
+  return nw.length ? '?'+ nw.join ('&') : '';
 }
