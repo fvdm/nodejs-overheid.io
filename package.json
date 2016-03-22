@@ -5,7 +5,7 @@
     "url": "https://frankl.in"
   },
   "name": "overheid.io",
-  "description": "Access overheid.io endpoints like OpenKvK, RDW and BAG",
+  "description": "Access overheid.io datasets like OpenKvK, RDW and BAG",
   "version": "0.2.0",
   "repository": {
     "type": "git",
