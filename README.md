@@ -5,7 +5,7 @@ overheid.io API wrapper
 
 [![Build Status](https://travis-ci.org/fvdm/nodejs-overheid.io.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-overheid.io)
 
-* [node.js](https://nodejs.org)
+* [Node.js](https://nodejs.org)
 * [overheid.io](https://overheid.io)
 * [API documentation](https://overheid.io/documentatie)
 
@@ -24,6 +24,7 @@ ovio ({
   params: { fields: ['eerstekleur'] },
   callback: function (err, data) {
     if (err) { return console.log (err); }
+
     console.log (data.eerstekleur);
   }
 });
@@ -54,7 +55,7 @@ timeout | integer | no       | 5000    | Wait time out in ms
 ```js
 var ovio = require ('overheid.io') ({
   apikey: 'abc123',
-  dataset: 'rdw'
+  dataset: 'voertuiggegevens'
 });
 ```
 
