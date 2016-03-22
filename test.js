@@ -8,142 +8,89 @@ License:      Unlicense (Public Domain) - see LICENSE file
               (https://github.com/fvdm/nodejs-overheid.io/raw/master/LICENSE)
 */
 
+var dotest = require ('dotest');
+var app = require ('./');
+
+
 // Setup
-var app = require ('./') ({
+var ovio = app ({
   apikey: process.env.OVIO_APIKEY || null,
   timeout: process.env.OVIO_TIMEOUT || 5000,
-  dataset: 'rdw'
+  dataset: 'voertuiggegevens'
 });
 
 
-// handle exits
-var errors = 0;
-process.on ('exit', function () {
-  if (errors === 0) {
-    console.log ('\n\033[1mDONE, no errors.\033[0m\n');
-    process.exit (0);
-  } else {
-    console.log ('\n\033[1mFAIL, '+ errors +' error'+ (errors > 1 ? 's' : '') +' occurred!\033[0m\n');
-    process.exit (1);
-  }
+dotest.add ('Module', function () {
+  dotest.test ()
+    .isFunction ('fail', 'exports', app)
+    .isFunction ('fail', 'module', ovio)
+    .done ();
 });
 
-// prevent errors from killing the process
-process.on ('uncaughtException', function (err) {
-  console.log ();
-  console.error (err.stack);
-  console.trace ();
-  console.log ();
-  errors++;
-});
 
-// Queue to prevent flooding
-var queue = [];
-var next = 0;
-
-function doNext () {
-  next++;
-  if (queue [next]) {
-    queue [next] ();
-  }
-}
-
-// doTest( passErr, 'methods', [
-//   ['feeds', typeof feeds === 'object']
-// ])
-function doTest (err, label, tests) {
-  if (err instanceof Error) {
-    console.error ('\033[1m\033[31mERROR\033[0m - '+ label +'\n');
-    console.dir (err, { depth: null, colors: true });
-    console.log ();
-    console.error (err.stack);
-    console.log ();
-    errors++;
-  } else {
-    var testErrors = [];
-    for (var i = 0; i < tests.length; i++) {
-      if (tests [i] [1] !== true) {
-        testErrors.push (tests [i] [0]);
-        errors++;
-      }
-    }
-
-    if(testErrors.length === 0) {
-      console.log ('\033[1m\033[32mgood\033[0m - '+ label);
-    } else {
-      console.error ('\033[1m\033[31mFAIL\033[0m - '+ label +' ('+ testErrors.join (', ') +')');
-    }
-  }
-
-  doNext ();
-}
-
-
-queue.push (function () {
-  app ({
+dotest.add ('config.timeout', function () {
+  ovio ({
     path: '4-TFL-24',
     params: { fields: ['eerstekleur'] },
     timeout: 1,
     callback: function (err) {
-      doTest (null, 'config.timeout', [
-        ['type', err instanceof Error],
-        ['message', err && err.message === 'request failed'],
-        ['error', err && err.error instanceof Object],
-        ['code', err && err.error && err.error.code === 'TIMEOUT']
-      ]);
+      dotest.test ()
+        .isError ('fail', 'err', err)
+        .isExactly ('fail', 'err.message', err && err.message, 'request failed')
+        .isError ('fail', 'err.error', err && err.error)
+        .isExactly ('fail', 'err.error.code', err && err.error && err.error.code, 'TIMEOUT')
+        .done ();
     }
   });
 });
 
 
-queue.push (function () {
-  app ({
+dotest.add ('no result', function () {
+  ovio ({
     path: 'error.test',
     callback: function (err) {
-      doTest (null, 'no result', [
-        ['type', err instanceof Error],
-        ['message', err && err.message === 'no result']
-      ]);
+      dotest.test ()
+        .isError ('fail', 'err', err)
+        .isExactly ('fail', 'err.message', err && err.message, 'no result')
+        .done ();
     }
   });
 });
 
 
-queue.push (function () {
-  app ({
+dotest.add ('item', function () {
+  ovio ({
     path: '4-TFL-24',
-    params: { fields: ['eerstekleur'] },
+//     params: { fields: ['eerstekleur'] },
     callback: function (err, data) {
-      doTest (err, 'item', [
-        ['data', data && data != null],
-        ['type', data instanceof Object],
-        ['property', data && data.kenteken === '4-TFL-24'],
-        ['field', data && typeof data.eerstekleur === 'string']
-      ]);
+      dotest.test (err)
+        .isNotEmpty ('fail', 'data', data)
+        .isObject ('fail', 'data', data)
+        .isExactly ('fail', 'data.kenteken', data && data.kenteken, '4-TFL-24')
+        .isString ('fail', 'data.eerstekleur', data && data.eerstekleur)
+        .done ();
     }
   });
 });
 
 
-queue.push (function () {
-  app ({
+dotest.add ('list', function () {
+  ovio ({
     params: {
       filters: { merk: 'bmw' },
       fields: ['eerstekleur', 'vermogen']
     },
     callback: function (err, data) {
-      doTest (err, 'list', [
-        ['type', data && data instanceof Object],
-        ['total', data && data.totalItemCount >= 1],
-        ['path', data && data._embedded && data._embedded.kenteken instanceof Array],
-        ['size', data && data._embedded && data._embedded.kenteken && data._embedded.kenteken.length >= 1],
-        ['item', data && data._embedded && data._embedded.kenteken && data._embedded.kenteken.length && data._embedded.kenteken [0] instanceof Object]
-      ]);
+      dotest.test (err)
+        .isObject ('fail', 'data', data)
+        .isCondition ('fail', 'data.totalItemCount', data && data.totalItemCount, '>=', 1)
+        .isArray ('fail', 'data._embedded.kenteken', data && data._embedded && data._embedded.kenteken)
+        .isNotEmpty ('warn', 'data._embedded.kenteken', data && data._embedded && data._embedded.kenteken)
+        .done ();
     }
   });
 });
 
 
 // Start the tests
-console.log ('Running tests...\n');
-queue [0] ();
+dotest.run ();
