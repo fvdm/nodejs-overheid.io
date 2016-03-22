@@ -47,7 +47,7 @@ module.exports = function (config) {
       method: 'GET',
       headers: {
         'ovio-api-key': config.apikey || '',
-        'User-Agent': 'npmjs.com/overheid.io'
+        'User-Agent': 'overheid.io (https://github.com/fvdm/nodejs-overheid.io)'
       },
       timeout: request.timeout || config.timeout || defaults.timeout
     };
