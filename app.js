@@ -15,6 +15,31 @@ var defaults = {
 };
 
 
+function fixParams (obj) {
+  var key;
+  var nw = [];
+  var k;
+  var i;
+
+  if (obj) {
+    for (key in obj) {
+      if (obj [key] instanceof Array) {
+        for (i = 0; i < obj [key] .length; i++) {
+          nw.push (key + '[]=' + encodeURIComponent (obj [key] [i]));
+        }
+      } else if (obj [key] instanceof Object) {
+        for (k in obj [key]) {
+          nw.push (key + '[' + k + ']=' + encodeURIComponent (obj [key] [k]));
+        }
+      } else {
+        nw.push (key + '=' + encodeURIComponent (obj [key]));
+      }
+    }
+  }
+  return nw.length ? '?' + nw.join ('&') : '';
+}
+
+
 module.exports = function (config) {
   return function (request) {
     var url = 'https://overheid.io/api/'+ (request.dataset || config.dataset);
@@ -64,24 +89,3 @@ module.exports = function (config) {
     });
   };
 };
-
-
-function fixParams (obj) {
-  var nw = [], k, i;
-  if (obj) {
-    for (key in obj) {
-      if (obj [key] instanceof Array) {
-        for (i = 0; i < obj [key] .length; i++) {
-          nw.push (key +'[]='+ encodeURIComponent (obj [key] [i]));
-        }
-      } else if (obj [key] instanceof Object) {
-        for (k in obj [key]) {
-          nw.push (key +'['+ k +']='+ encodeURIComponent (obj [key] [k]));
-        }
-      } else {
-        nw.push (key +'='+ encodeURIComponent (obj [key]));
-      }
-    }
-  }
-  return nw.length ? '?'+ nw.join ('&') : '';
-}
