@@ -42,19 +42,20 @@ function fixParams (obj) {
 
 module.exports = function (config) {
   return function (request) {
-    var url = 'https://overheid.io/api/'+ (request.dataset || config.dataset);
-    url += request.path ? '/'+ request.path : '';
-    url += fixParams (request.params);
-
     var options = {
+      url: 'https://overheid.io/api/' + (request.dataset || config.dataset),
+      method: 'GET',
       headers: {
         'ovio-api-key': config.apikey || '',
         'User-Agent': 'npmjs.com/overheid.io'
       },
-      timeout: parseInt (request.timeout || config.timeout || defaults.timeout)
+      timeout: request.timeout || config.timeout || defaults.timeout
     };
 
-    http.get (url, options, function (err, res) {
+    options.url += request.path ? '/' + request.path : '';
+    options.url += fixParams (request.params);
+
+    http.doRequest (options, function (err, res) {
       var data = res && res.body || null;
       var error = null;
 
