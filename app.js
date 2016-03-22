@@ -74,8 +74,14 @@ module.exports = function (config) {
           request.callback (error);
           return;
         }
+      } catch (e) {
+        error = new Error ('invalid response');
+        error.error = e;
+        error.code = res.statusCode;
+        error.body = data;
+        request.callback (error);
+        return;
       }
-      catch (e) {}
 
       if (res.statusCode >= 300) {
         error = new Error ('API error');
