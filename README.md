@@ -10,8 +10,8 @@ overheid.io API wrapper
 * [API documentation](https://overheid.io/documentatie)
 
 
-Voorbeeld
----------
+Example
+-------
 
 ```js
 var ovio = require ('overheid.io') ({
@@ -30,30 +30,25 @@ ovio ({
 ```
 
 
-Installatie
------------
+Installation
+------------
 
-Normaal: `npm install overheid.io`
-
-Development: `npm install fvdm/nodejs-overheid.io#develop`
+`npm install overheid.io`
 
 
-Setup
------
+Configuration
+-------------
 
-De module geeft een _function_ terug voor algemene instellingen.
-
-
-#### Instellingen
-
- param   | type    | vereist | default | uitleg
-:--------|:--------|:--------|:--------|:--------------------------
- apikey  | string  | ja      |         | de API key
- dataset | string  | nee     |         | welke dataset te gebruiken
- timeout | integer | nee     | 5000    | wacht time-out in ms
+This module provides one _function_, use it for configuration.
 
 
-> Je kan `timeout` en `dataset` ook per call in de API functie instellen.
+#### Config parameters
+
+param   | type    | required | default | description
+:-------|:--------|:---------|:--------|:--------------------
+apikey  | string  | yes      |         | Your account API key
+dataset | string  | no       |         | Which dataset to use
+timeout | integer | no       | 5000    | Wait time out in ms
 
 
 ```js
@@ -64,24 +59,16 @@ var ovio = require ('overheid.io') ({
 ```
 
 
-API functie
------------
+API function
+------------
 
-De _Setup_ geeft ook een _function_ terug, deze doet de API calls.
-
-
-#### Instellingen
-
- param    | type     | vereist | default| uitleg
-:---------|:---------|:--------|:-------|:-----------------------------
- path     | string   | nee     |        | resource pad, i.e. `DA-GO-12`
- params   | object   | nee     |        | parameters om mee te sturen
- timeout  | integer  | nee     | 5000   | wacht time-out in ms
- dataset  | string   | nee     |        | welke dataset te gebruiken
- callback | function | ja      |        | `function (err, data) {}`
-
-
-> `timeout` and `dataset` default to Setup when not provided.
+param    | type     | required | default                    | required
+:--------|:---------|:---------|:---------------------------|:------------------------------
+path     | string   | no       |                            | Resource path, i.e. `DA-GO-12`
+params   | object   | no       |                            | Parameters to send along
+dataset  | string   | no       | `config.dataset`           | Which dataset to use
+timeout  | integer  | no       | `5000` or `config.timeout` | Wait timeout in ms
+callback | function | yes      |                            | `function (err, data) {}`
 
 
 ```js
