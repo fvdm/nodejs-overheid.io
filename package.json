@@ -18,7 +18,9 @@
   "dependencies": {
     "httpreq": "^0.4.16"
   },
-  "devDependencies":      {},
+  "devDependencies": {
+    "eslint": "^2.4.0"
+  },
   "optionalDependencies": {},
   "engines": {
     "node":               ">=0.8.0"
