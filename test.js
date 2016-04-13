@@ -31,7 +31,9 @@ dotest.add ('Module', function () {
 dotest.add ('config.timeout', function () {
   ovio ({
     path: '4-TFL-24',
-    params: { fields: ['eerstekleur'] },
+    params: {
+      fields: ['eerstekleur']
+    },
     timeout: 1,
     callback: function (err) {
       dotest.test ()
@@ -61,7 +63,6 @@ dotest.add ('no result', function () {
 dotest.add ('item', function () {
   ovio ({
     path: '4-TFL-24',
-//     params: { fields: ['eerstekleur'] },
     callback: function (err, data) {
       dotest.test (err)
         .isNotEmpty ('fail', 'data', data)
