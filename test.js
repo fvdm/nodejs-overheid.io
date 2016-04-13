@@ -13,10 +13,25 @@ var app = require ('./');
 
 
 // Setup
-var ovio = app ({
+var config = {
   apikey: process.env.OVIO_APIKEY || null,
   timeout: process.env.OVIO_TIMEOUT || 5000,
   dataset: 'voertuiggegevens'
+};
+
+var ovio = app (config);
+
+
+// Tests
+dotest.add ('API key', function () {
+  if (!config.apikey) {
+    dotest.log ('OVIO_APIKEY is not set');
+    dotest.exit ();
+  } else {
+    dotest.log ('good', 'OVIO_APIKEY key is set');
+    dotest.test ()
+      .done ();
+  }
 });
 
 
