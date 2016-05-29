@@ -5,6 +5,7 @@ overheid.io API wrapper
 
 [![npm](https://img.shields.io/npm/v/overheid.io.svg?maxAge=3600)](https://github.com/fvdm/nodejs-overheid.io/blob/master/CHANGELOG.md)
 [![Build Status](https://travis-ci.org/fvdm/nodejs-overheid.io.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-overheid.io)
+[![Dependency Status](https://gemnasium.com/badges/github.com/fvdm/nodejs-overheid.io.svg)](https://gemnasium.com/github.com/fvdm/nodejs-overheid.io#runtime-dependencies)
 
 * [Node.js](https://nodejs.org)
 * [overheid.io](https://overheid.io)
