@@ -119,4 +119,4 @@ For more information, please refer to <http://unlicense.org/>
 Author
 ------
 
-[Franklin van de Meent(https://frankl.in)
+[Franklin van de Meent](https://frankl.in)
