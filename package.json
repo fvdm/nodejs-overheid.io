@@ -24,7 +24,6 @@
     "eslint": "^3.3.1",
     "istanbul": "^0.4.4"
   },
-  "optionalDependencies": {},
   "engines": {
     "node": ">=4.0.0"
   },
@@ -35,6 +34,8 @@
     "overheid.io",
     "overheid",
     "openkvk",
+    "handelsregister",
+    "kvk",
     "rdw",
     "bag",
     "nl",
