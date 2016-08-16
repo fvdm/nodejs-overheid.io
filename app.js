@@ -14,6 +14,18 @@ var defaults = {
   timeout: 5000
 };
 
+
+/**
+ * Call back an error
+ *
+ * @callback callback
+ * @param msg {string} - Error.message
+ * @param err {mixed} - Error.error
+ * @param res {object, null} - Client response
+ * @param callback {function} - `function (err) {}`
+ * @return {void}
+ */
+
 function doError (msg, err, res, callback) {
   var error = new Error (msg);
 
@@ -22,6 +34,14 @@ function doError (msg, err, res, callback) {
   error.body = res && res.body;
   callback (error);
 }
+
+
+/**
+ * Translate nested params to string
+ *
+ * @param obj {mixed} - Object to process
+ * @return {string} - Querystring
+ */
 
 function fixParams (obj) {
   var key;
@@ -48,7 +68,31 @@ function fixParams (obj) {
 }
 
 
+/**
+ * Setup
+ *
+ * @param config {object}
+ * @param config.apikey {string} - API key
+ * @param config.dataset {string} - API dataset
+ * @param [config.timeout = 5000] {number} - Request timeout in ms
+ * @return {function}
+ */
+
 module.exports = function (config) {
+
+
+  /**
+   * Send API request
+   *
+   * @param request {object}
+   * @param request.dataset {string} - Name of dataset, i.e. `kvk`
+   * @param [request.timeout = 5000] {number} - Request timeout in ms
+   * @param request.path {string} - Request path after `dataset` part
+   * @param request.params {object} - Data parameters to send
+   * @param request.callback {function} - `function (err, data) {}`
+   * @return {void}
+   */
+
   return function (request) {
     var options = {
       url: 'https://overheid.io/api/' + (request.dataset || config.dataset),
