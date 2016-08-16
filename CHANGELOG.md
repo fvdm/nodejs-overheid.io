@@ -1,3 +1,9 @@
+#### 0.3.4 (2016-8-16)
+
+##### Code Style Changes
+
+* **main:** Removed block padding ([2dec789e](https://github.com/fvdm/nodejs-overheid.io/commit/2dec789e1813b13060b35a695b297b9c42fee8d6))
+
 #### 0.3.3 (2016-8-16)
 
 ##### Refactors
