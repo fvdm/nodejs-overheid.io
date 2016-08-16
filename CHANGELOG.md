@@ -1,3 +1,13 @@
+#### 0.3.2 (2016-8-16)
+
+##### Chores
+
+* **package:** Minor clean up, added keywords ([b6b7f907](https://github.com/fvdm/nodejs-overheid.io/commit/b6b7f907cec462fd6abb57a47622ad49f3ec32c6))
+
+##### Tests
+
+* **script:** Run tests even when API key is not set ([27b6ce1e](https://github.com/fvdm/nodejs-overheid.io/commit/27b6ce1e68c89172e2b2443cb76b8e6ea3464c4b))
+
 #### 0.3.1 (2016-8-16)
 
 ##### Chores
