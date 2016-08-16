@@ -19,15 +19,17 @@
     "httpreq": "^0.4.22"
   },
   "devDependencies": {
+    "coveralls": "^2.11.12",
     "dotest": "^1.12.4",
-    "eslint": "^3.3.1"
+    "eslint": "^3.3.1",
+    "istanbul": "^0.4.4"
   },
   "optionalDependencies": {},
   "engines": {
     "node": ">=4.0.0"
   },
   "scripts": {
-    "test": "st=0; eslint . || st=1; node test.js || st=1; exit $st"
+    "test": "bash test.sh"
   },
   "keywords": [
     "overheid.io",
