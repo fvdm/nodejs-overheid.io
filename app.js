@@ -79,8 +79,6 @@ function fixParams (obj) {
  */
 
 module.exports = function (config) {
-
-
   /**
    * Send API request
    *
