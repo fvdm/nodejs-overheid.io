@@ -1,3 +1,9 @@
+#### 0.3.5 (2016-8-16)
+
+##### Documentation Changes
+
+* **readme:** Fixed syntax typo ([15e3c071](https://github.com/fvdm/nodejs-overheid.io/commit/15e3c071b60b93015de9f9fa1d1a5c23fa2479d7))
+
 #### 0.3.4 (2016-8-16)
 
 ##### Code Style Changes
