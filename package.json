@@ -6,7 +6,7 @@
   },
   "name": "overheid.io",
   "description": "Access overheid.io datasets like OpenKvK, RDW and BAG",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/fvdm/nodejs-overheid.io.git"
