@@ -14,6 +14,14 @@ var defaults = {
   timeout: 5000
 };
 
+function doError (msg, err, res, callback) {
+  var error = new Error (msg);
+
+  error.error = err;
+  error.code = res && res.statusCode;
+  error.body = res && res.body;
+  callback (error);
+}
 
 function fixParams (obj) {
   var key;
@@ -57,13 +65,10 @@ module.exports = function (config) {
 
     http.doRequest (options, function (err, res) {
       var data = res && res.body || null;
-      var error = null;
+      var error;
 
       if (err) {
-        error = new Error ('request failed');
-        error.error = err;
-        error.body = data;
-        request.callback (error);
+        doError ('request failed', err, res, request.callback);
         return;
       }
 
@@ -76,11 +81,7 @@ module.exports = function (config) {
           return;
         }
       } catch (e) {
-        error = new Error ('invalid response');
-        error.error = e;
-        error.code = res.statusCode;
-        error.body = data;
-        request.callback (error);
+        doError ('invalid response', e, res, request.callback);
         return;
       }
 
