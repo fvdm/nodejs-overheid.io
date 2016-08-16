@@ -23,22 +23,10 @@ var ovio = app (config);
 
 
 // Tests
-dotest.add ('API key', function (test) {
-  if (!config.apikey) {
-    dotest.log ('OVIO_APIKEY is not set');
-    dotest.exit ();
-  } else {
-    dotest.log ('good', 'OVIO_APIKEY key is set');
-    test ()
-      .done ();
-  }
-});
-
-
 dotest.add ('Module', function (test) {
   test ()
     .isFunction ('fail', 'exports', app)
-    .isFunction ('fail', 'module', ovio)
+    .isFunction ('fail', 'interface', ovio)
     .done ();
 });
 
