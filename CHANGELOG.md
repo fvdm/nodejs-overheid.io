@@ -1,3 +1,10 @@
+#### 0.3.3 (2016-8-16)
+
+##### Refactors
+
+* **main:** JSdoc the functions ([953b88d7](https://github.com/fvdm/nodejs-overheid.io/commit/953b88d728d4855077741ae76ff2e490794077f8))
+* **errors:** Moved common errors to doError() ([ec38a79b](https://github.com/fvdm/nodejs-overheid.io/commit/ec38a79b0f012593aad575c8b794b1f0c888e06d))
+
 #### 0.3.2 (2016-8-16)
 
 ##### Chores
