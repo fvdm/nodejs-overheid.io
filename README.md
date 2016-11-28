@@ -67,7 +67,7 @@ var ovio = require ('overheid.io') ({
 API function
 ------------
 
-param    | type     | required | default                    | required
+param    | type     | required | default                    | description
 :--------|:---------|:---------|:---------------------------|:------------------------------
 path     | string   | no       |                            | Resource path, i.e. `DA-GO-12`
 params   | object   | no       |                            | Parameters to send along
