@@ -18,19 +18,38 @@ Example
 -------
 
 ```js
+// Configuration
 var ovio = require ('overheid.io') ({
   apikey: 'abc123',
   dataset: 'rdw'
 });
 
+
+// Post process callback
+function postProcess (err, data) {
+  console.dir (err || data, {
+    depth: null,
+    colors: true
+  });
+}
+
+
+// Get details about one license plate
 ovio ({
   path: '4-TFL-24',
-  params: { fields: ['eerstekleur'] },
-  callback: function (err, data) {
-    if (err) { return console.log (err); }
+  params: {
+    fields: ['eerstekleur', 'vervaldatumapk']
+  },
+  callback: postProcess
+});
 
-    console.log (data.eerstekleur);
-  }
+
+// Search the dataset
+ovio ({
+  params: {
+    filters: { merk: 'bmw' }
+  },
+  callback: postProcess
 });
 ```
 
@@ -76,33 +95,7 @@ timeout  | integer  | no       | `5000` or `config.timeout` | Wait timeout in ms
 callback | function | yes      |                            | `function (err, data) {}`
 
 
-```js
-function postProcess (err, data) {
-  console.dir (err || data, {
-    depth: null,
-    colors: true
-  });
-}
-
-
-// Get details about one license plate
-ovio ({
-  path: '4-TFL-24',
-  params: {
-    fields: ['eerstekleur', 'vervaldatumapk']
-  },
-  callback: postProcess
-});
-
-
-// Search the dataset
-ovio ({
-  params: {
-    'filters[merk]': 'bmw'
-  },
-  callback: postProcess
-});
-```
+See [Example](#example) above
 
 
 Errors
