@@ -70,6 +70,7 @@ dotest.add ('item', function (test) {
     path: '4-TFL-24',
     callback: function (err, data) {
       test (err)
+        .isNull ('fail', 'err', err)
         .isNotEmpty ('fail', 'data', data)
         .isObject ('fail', 'data', data)
         .isExactly ('fail', 'data.kenteken', data && data.kenteken, '4-TFL-24')
@@ -92,6 +93,7 @@ dotest.add ('list', function (test) {
       var embedded = data && data._embedded;
 
       test (err)
+        .isNull ('fail', 'err', err)
         .isObject ('fail', 'data', data)
         .isCondition ('fail', 'data.totalItemCount', data && data.totalItemCount, '>=', 1)
         .isObject ('fail', 'data._embedded', embedded)
