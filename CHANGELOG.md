@@ -1,3 +1,44 @@
+## 1.0.0 (2016-11-28)
+
+##### Chores
+
+* **develop:** Added bitHound config ([e4044433](https://github.com/fvdm/nodejs-overheid.io/commit/e4044433a6b7b65de7322b6e6c25801c425d6acb))
+* **package:** Replaced test runner and dev deps by dotest ([8605da3a](https://github.com/fvdm/nodejs-overheid.io/commit/8605da3a3468bfd5aae59d5383e7425bd6ff4f16))
+
+##### Documentation Changes
+
+* **readme:**
+  * Moved long example to top ([a3269884](https://github.com/fvdm/nodejs-overheid.io/commit/a32698841874a8f635ad059019b4be201bf321e6))
+  * Added errors section ([59ddf12f](https://github.com/fvdm/nodejs-overheid.io/commit/59ddf12f0a0238c0c1843db7fc40d3069a01c011))
+  * Examples for different uses ([9764d9ac](https://github.com/fvdm/nodejs-overheid.io/commit/9764d9ac06f2f39f2a4992c1026dba5b569ee602))
+  * Fixed table header ([b89ec094](https://github.com/fvdm/nodejs-overheid.io/commit/b89ec0940383a12d47be48d2429b6a6e20cfc140))
+* **badges:**
+  * Added bitHound code quality ([2b401dea](https://github.com/fvdm/nodejs-overheid.io/commit/2b401deac13b060ae057876a99982e769418b388))
+  * Replace Gemnasium with bitHound deps ([2e40d842](https://github.com/fvdm/nodejs-overheid.io/commit/2e40d8426b229467d9359c0b55f878d7c8eb1dee))
+
+##### Refactors
+
+* **main:**
+  * Rewrite error handling ([d38bafa5](https://github.com/fvdm/nodejs-overheid.io/commit/d38bafa5059727d9e438b906aaf73738f64f463f))
+  * Default data to empty string ([5caeee26](https://github.com/fvdm/nodejs-overheid.io/commit/5caeee26ba14cdcdd268ff9d851bf511af82000a))
+
+##### Code Style Changes
+
+* **test:** Removed space on function call w/o params ([2b009761](https://github.com/fvdm/nodejs-overheid.io/commit/2b009761bdf479754ded66cb620351114326b3c2))
+* **main:** Removed meaningless spaces ([37aeafc4](https://github.com/fvdm/nodejs-overheid.io/commit/37aeafc49746b753f2b4c4cf2dd44f29e058de52))
+
+##### Tests
+
+* **main:**
+  * 'no result' is 'Error: no result' ([2fc16860](https://github.com/fvdm/nodejs-overheid.io/commit/2fc16860e1555da5d969a7f44ccaeff8f8b4fe73))
+  * config.timeout is ‘request failed’ ([c12a0fa0](https://github.com/fvdm/nodejs-overheid.io/commit/c12a0fa04a3b0e0c2094f8544940f6fe9ccb1e74))
+  * Reordered 'Error: invalid response' checks ([bddf57ee](https://github.com/fvdm/nodejs-overheid.io/commit/bddf57ee30ae5cb4febe89e4bf5ef650310a7f2a))
+  * Check err isNull on normal requests ([c58c3d3b](https://github.com/fvdm/nodejs-overheid.io/commit/c58c3d3b89068e26d625e8d2fee4b6571a7ec104))
+  * Added 'Error: API error' test ([a0a3d16f](https://github.com/fvdm/nodejs-overheid.io/commit/a0a3d16fdfc6b9b41594731d44c3a2ab686451ec))
+  * Added 'Error: invalid response' test ([37d9cee5](https://github.com/fvdm/nodejs-overheid.io/commit/37d9cee58c57f14269bc1c24c5deec8fedd0c005))
+  * Include key/value param ([18c355ed](https://github.com/fvdm/nodejs-overheid.io/commit/18c355ed56418f0c84ea906de6abf4d72ae0ae6b))
+* **config:** Use dynamic node versions on Travis CI ([b1ff71e8](https://github.com/fvdm/nodejs-overheid.io/commit/b1ff71e8bcb74c179ffe393747d231a20fa8b75b))
+
 #### 0.3.5 (2016-8-16)
 
 ##### Documentation Changes
