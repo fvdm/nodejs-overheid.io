@@ -31,19 +31,6 @@ dotest.add ('Module', function (test) {
 });
 
 
-dotest.add ('no result', function (test) {
-  ovio ({
-    path: 'error.test',
-    callback: function (err) {
-      test()
-        .isError ('fail', 'err', err)
-        .isExactly ('fail', 'err.message', err && err.message, 'no result')
-        .done();
-    }
-  });
-});
-
-
 dotest.add ('item', function (test) {
   ovio ({
     path: '4-TFL-24',
@@ -78,6 +65,20 @@ dotest.add ('list', function (test) {
         .isObject ('fail', 'data._embedded', embedded)
         .isArray ('fail', 'data._embedded.kenteken', embedded && embedded.kenteken)
         .isNotEmpty ('warn', 'data._embedded.kenteken', embedded && embedded.kenteken)
+        .done();
+    }
+  });
+});
+
+
+dotest.add ('Error: no result', function (test) {
+  ovio ({
+    path: 'error.test',
+    callback: function (err, data) {
+      test()
+        .isError ('fail', 'err', err)
+        .isExactly ('fail', 'err.message', err && err.message, 'no result')
+        .isUndefined ('fail', 'data', data)
         .done();
     }
   });
