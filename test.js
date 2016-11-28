@@ -31,27 +31,6 @@ dotest.add ('Module', function (test) {
 });
 
 
-dotest.add ('config.timeout', function (test) {
-  ovio ({
-    path: '4-TFL-24',
-    params: {
-      fields: ['eerstekleur']
-    },
-    timeout: 1,
-    callback: function (err) {
-      var error = err && err.error;
-
-      test()
-        .isError ('fail', 'err', err)
-        .isExactly ('fail', 'err.message', err && err.message, 'request failed')
-        .isError ('fail', 'err.error', error)
-        .isExactly ('fail', 'err.error.code', error && error.code, 'TIMEOUT')
-        .done();
-    }
-  });
-});
-
-
 dotest.add ('no result', function (test) {
   ovio ({
     path: 'error.test',
@@ -99,6 +78,28 @@ dotest.add ('list', function (test) {
         .isObject ('fail', 'data._embedded', embedded)
         .isArray ('fail', 'data._embedded.kenteken', embedded && embedded.kenteken)
         .isNotEmpty ('warn', 'data._embedded.kenteken', embedded && embedded.kenteken)
+        .done();
+    }
+  });
+});
+
+
+dotest.add ('Error: request failed', function (test) {
+  ovio ({
+    path: '4-TFL-24',
+    params: {
+      fields: ['eerstekleur']
+    },
+    timeout: 1,
+    callback: function (err, data) {
+      var error = err && err.error;
+
+      test()
+        .isError ('fail', 'err', err)
+        .isExactly ('fail', 'err.message', err && err.message, 'request failed')
+        .isError ('fail', 'err.error', error)
+        .isExactly ('fail', 'err.error.code', error && error.code, 'TIMEOUT')
+        .isUndefined ('fail', 'data', data)
         .done();
     }
   });
