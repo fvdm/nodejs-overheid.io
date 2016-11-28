@@ -106,8 +106,8 @@ module.exports = function (config) {
     options.url += fixParams (request.params);
 
     http.doRequest (options, function (err, res) {
-      var data = res && res.body || null;
       var error;
+      var data = res && res.body || '';
 
       if (err) {
         doError ('request failed', err, res, request.callback);
