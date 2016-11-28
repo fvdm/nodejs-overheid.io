@@ -120,5 +120,28 @@ dotest.add ('Error: invalid response', function (test) {
 });
 
 
+dotest.add ('Error: API error', function (test) {
+  var tmp = app ({
+    dataset: 'voertuiggegevens'
+  });
+
+  tmp ({
+    params: {
+      filters: { merk: 'bmw' }
+    },
+    callback: function (err, data) {
+      test ()
+        .isError ('fail', 'err', err)
+        .isExactly ('fail', 'err.message', err && err.message, 'API error')
+        .isString ('fail', 'err.error', err && err.error)
+        .isNotEmpty ('fail', 'err.error', err && err.error)
+        .isCondition ('fail', 'err.code', err && err.code, '>=', 300)
+        .isUndefined ('fail', 'data', data)
+        .done ();
+    }
+  });
+});
+
+
 // Start the tests
 dotest.run ();
