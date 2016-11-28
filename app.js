@@ -51,16 +51,16 @@ function fixParams (obj) {
 
   if (obj) {
     for (key in obj) {
-      if (obj [key] instanceof Array) {
-        for (i = 0; i < obj [key] .length; i++) {
-          nw.push (key + '[]=' + encodeURIComponent (obj [key] [i]));
+      if (obj[key] instanceof Array) {
+        for (i = 0; i < obj[key].length; i++) {
+          nw.push (key + '[]=' + encodeURIComponent (obj[key][i]));
         }
-      } else if (obj [key] instanceof Object) {
-        for (k in obj [key]) {
-          nw.push (key + '[' + k + ']=' + encodeURIComponent (obj [key] [k]));
+      } else if (obj[key] instanceof Object) {
+        for (k in obj[key]) {
+          nw.push (key + '[' + k + ']=' + encodeURIComponent (obj[key][k]));
         }
       } else {
-        nw.push (key + '=' + encodeURIComponent (obj [key]));
+        nw.push (key + '=' + encodeURIComponent (obj[key]));
       }
     }
   }
@@ -117,7 +117,7 @@ module.exports = function (config) {
       try {
         data = JSON.parse (data);
 
-        if (Object.keys (data) .length === 1 && Object.keys (data.headers) .length === 0) {
+        if (Object.keys (data).length === 1 && Object.keys (data.headers).length === 0) {
           error = new Error ('no result');
           request.callback (error);
           return;
