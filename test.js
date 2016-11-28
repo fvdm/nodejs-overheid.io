@@ -114,8 +114,8 @@ dotest.add ('Error: invalid response', function (test) {
       test()
         .isError ('fail', 'err', err)
         .isExactly ('fail', 'err.message', err && err.message, 'invalid response')
-        .isUndefined ('fail', 'data', data)
         .isCondition ('warn', 'err.code', err && err.code, '>=', 300)
+        .isUndefined ('fail', 'data', data)
         .done();
     }
   });
