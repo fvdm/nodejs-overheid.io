@@ -77,13 +77,30 @@ callback | function | yes      |                            | `function (err, da
 
 
 ```js
+function postProcess (err, data) {
+  console.dir (err || data, {
+    depth: null,
+    colors: true
+  });
+}
+
+
+// Get details about one license plate
 ovio ({
   path: '4-TFL-24',
-  params: { fields: ['eerstekleur'] },
-  callback: function (err, data) {
-    if (err) { return console.log (err); }
-    console.log (data.eerstekleur);
-  }
+  params: {
+    fields: ['eerstekleur', 'vervaldatumapk']
+  },
+  callback: postProcess
+});
+
+
+// Search the dataset
+ovio ({
+  params: {
+    'filters[merk]': 'bmw'
+  },
+  callback: postProcess
 });
 ```
 
