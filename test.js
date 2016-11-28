@@ -103,5 +103,22 @@ dotest.add ('list', function (test) {
 });
 
 
+dotest.add ('Error: invalid response', function (test) {
+  ovio ({
+    params: {
+      fields: ''
+    },
+    callback: function (err, data) {
+      test ()
+        .isError ('fail', 'err', err)
+        .isExactly ('fail', 'err.message', err && err.message, 'invalid response')
+        .isUndefined ('fail', 'data', data)
+        .isCondition ('warn', 'err.code', err && err.code, '>=', 300)
+        .done ();
+    }
+  });
+});
+
+
 // Start the tests
 dotest.run ();
