@@ -24,10 +24,10 @@ var ovio = app (config);
 
 // Tests
 dotest.add ('Module', function (test) {
-  test ()
+  test()
     .isFunction ('fail', 'exports', app)
     .isFunction ('fail', 'interface', ovio)
-    .done ();
+    .done();
 });
 
 
@@ -41,12 +41,12 @@ dotest.add ('config.timeout', function (test) {
     callback: function (err) {
       var error = err && err.error;
 
-      test ()
+      test()
         .isError ('fail', 'err', err)
         .isExactly ('fail', 'err.message', err && err.message, 'request failed')
         .isError ('fail', 'err.error', error)
         .isExactly ('fail', 'err.error.code', error && error.code, 'TIMEOUT')
-        .done ();
+        .done();
     }
   });
 });
@@ -56,10 +56,10 @@ dotest.add ('no result', function (test) {
   ovio ({
     path: 'error.test',
     callback: function (err) {
-      test ()
+      test()
         .isError ('fail', 'err', err)
         .isExactly ('fail', 'err.message', err && err.message, 'no result')
-        .done ();
+        .done();
     }
   });
 });
@@ -74,7 +74,7 @@ dotest.add ('item', function (test) {
         .isObject ('fail', 'data', data)
         .isExactly ('fail', 'data.kenteken', data && data.kenteken, '4-TFL-24')
         .isString ('fail', 'data.eerstekleur', data && data.eerstekleur)
-        .done ();
+        .done();
     }
   });
 });
@@ -97,7 +97,7 @@ dotest.add ('list', function (test) {
         .isObject ('fail', 'data._embedded', embedded)
         .isArray ('fail', 'data._embedded.kenteken', embedded && embedded.kenteken)
         .isNotEmpty ('warn', 'data._embedded.kenteken', embedded && embedded.kenteken)
-        .done ();
+        .done();
     }
   });
 });
@@ -109,12 +109,12 @@ dotest.add ('Error: invalid response', function (test) {
       fields: ''
     },
     callback: function (err, data) {
-      test ()
+      test()
         .isError ('fail', 'err', err)
         .isExactly ('fail', 'err.message', err && err.message, 'invalid response')
         .isUndefined ('fail', 'data', data)
         .isCondition ('warn', 'err.code', err && err.code, '>=', 300)
-        .done ();
+        .done();
     }
   });
 });
@@ -130,18 +130,18 @@ dotest.add ('Error: API error', function (test) {
       filters: { merk: 'bmw' }
     },
     callback: function (err, data) {
-      test ()
+      test()
         .isError ('fail', 'err', err)
         .isExactly ('fail', 'err.message', err && err.message, 'API error')
         .isString ('fail', 'err.error', err && err.error)
         .isNotEmpty ('fail', 'err.error', err && err.error)
         .isCondition ('fail', 'err.code', err && err.code, '>=', 300)
         .isUndefined ('fail', 'data', data)
-        .done ();
+        .done();
     }
   });
 });
 
 
 // Start the tests
-dotest.run ();
+dotest.run();
