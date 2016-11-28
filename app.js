@@ -106,7 +106,6 @@ module.exports = function (config) {
     options.url += fixParams (request.params);
 
     http.doRequest (options, function (err, res) {
-      var error;
       var data = res && res.body || '';
 
       if (err) {
@@ -117,25 +116,16 @@ module.exports = function (config) {
       try {
         data = JSON.parse (data);
 
-        if (Object.keys (data).length === 1 && Object.keys (data.headers).length === 0) {
-          error = new Error ('no result');
-          request.callback (error);
-          return;
+        if (data.error) {
+          doError ('API error', data.error, res, request.callback);
+        } else if (Object.keys (data).length === 1 && Object.keys (data.headers).length === 0) {
+          doError ('no result', null, res, request.callback);
+        } else {
+          request.callback (null, data);
         }
       } catch (e) {
         doError ('invalid response', e, res, request.callback);
-        return;
       }
-
-      if (res.statusCode >= 300) {
-        error = new Error ('API error');
-        error.code = res.statusCode;
-        error.text = data.error || null;
-        request.callback (error);
-        return;
-      }
-
-      request.callback (null, data);
     });
   };
 };
