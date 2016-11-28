@@ -105,6 +105,18 @@ ovio ({
 ```
 
 
+Errors
+------
+
+message          | description                   | properties
+:----------------|:------------------------------|:--------------------------------
+request failed   | The request failed            | `.code`, `.error`, `.error.code`
+no results       | The result was empty          | `.code`
+API error        | The API returned an error     | `.code`, `.error`
+invalid response | The API returned invalid data | `.code`, `.body`
+
+
+
 Unlicense
 ---------
 
