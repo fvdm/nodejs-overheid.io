@@ -83,6 +83,8 @@ dotest.add ('item', function (test) {
 dotest.add ('list', function (test) {
   ovio ({
     params: {
+      query: '*X*',
+      queryFields: ['handelsbenaming'],
       filters: { merk: 'bmw' },
       fields: ['eerstekleur', 'vermogen']
     },
