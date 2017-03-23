@@ -118,6 +118,12 @@ module.exports = function (config) {
 
         if (data.error) {
           doError ('API error', data.error, res, request.callback);
+        } else if (data.original && data.original.error) {
+          if (data.original.error.match (/ niet gevonden\.$/)) {
+            doError ('no result', null, res, request.callback);
+          } else {
+            doError ('API error', data.original.error, res, request.callback);
+          }
         } else if (Object.keys (data).length === 1 && Object.keys (data.headers).length === 0) {
           doError ('no result', null, res, request.callback);
         } else {
