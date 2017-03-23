@@ -1,3 +1,15 @@
+#### 1.0.1 (2017-3-23)
+
+##### Chores
+
+* **package:**
+  * Update dotest dev dep ([3e5d7807](https://github.com/fvdm/nodejs-overheid.io/commit/3e5d780725f7f2aa78a3de31ef99813a58d70d5e))
+  * Update dev deps ([243fcffa](https://github.com/fvdm/nodejs-overheid.io/commit/243fcffae902044665dfdad127b58e2730a36213))
+
+##### Bug Fixes
+
+* **errors:** Fixed no result error ([2e811959](https://github.com/fvdm/nodejs-overheid.io/commit/2e811959a212403bbc217fc57891c00600467631))
+
 ## 1.0.0 (2016-11-28)
 
 ##### Chores
