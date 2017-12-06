@@ -1,6 +1,8 @@
 overheid.io
 ===========
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/fvdm/nodejs-overheid.io.svg)](https://greenkeeper.io/)
+
 overheid.io API wrapper
 
 [![npm](https://img.shields.io/npm/v/overheid.io.svg?maxAge=3600)](https://github.com/fvdm/nodejs-overheid.io/blob/master/CHANGELOG.md)
