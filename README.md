@@ -1,8 +1,6 @@
 overheid.io
 ===========
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/fvdm/nodejs-overheid.io.svg)](https://greenkeeper.io/)
-
 overheid.io API wrapper
 
 [![npm](https://img.shields.io/npm/v/overheid.io.svg?maxAge=3600)](https://github.com/fvdm/nodejs-overheid.io/blob/master/CHANGELOG.md)
@@ -10,6 +8,7 @@ overheid.io API wrapper
 [![Coverage Status](https://coveralls.io/repos/github/fvdm/nodejs-overheid.io/badge.svg?branch=master)](https://coveralls.io/github/fvdm/nodejs-overheid.io?branch=master)
 [![bitHound Dependencies](https://www.bithound.io/github/fvdm/nodejs-overheid.io/badges/dependencies.svg)](https://www.bithound.io/github/fvdm/nodejs-overheid.io/master/dependencies/npm)
 [![bitHound Code](https://www.bithound.io/github/fvdm/nodejs-overheid.io/badges/code.svg)](https://www.bithound.io/github/fvdm/nodejs-overheid.io)
+[![Greenkeeper badge](https://badges.greenkeeper.io/fvdm/nodejs-overheid.io.svg)](https://greenkeeper.io/)
 
 * [Node.js](https://nodejs.org)
 * [overheid.io](https://overheid.io)
